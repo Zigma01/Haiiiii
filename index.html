@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Satria ❤️ Felize</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #ffeef4;
+      overflow: hidden;
+    }
+
+    /* Efek hujan bunga */
+    .flower {
+      position: fixed;
+      top: -50px;
+      font-size: 24px;
+      animation: fall linear forwards;
+      z-index: 0;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0.8;
+      }
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 40px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      color: #d6336c;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #333;
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .choice button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 10px;
+      font-size: 16px;
+    }
+
+    .yes { background: #ff4d79; color: white; }
+    .no { background: #ccc; color: #333; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Untuk Felize 💕</h1>
+    <p>Halo Felize, ini aku, Satria. Dari sekian lama kita saling mengenal, aku selalu merasa ada sesuatu yang berbeda saat kamu ada. Aku ingin kamu tahu bahwa setiap senyummu membuat hariku jauh lebih indah.</p>
+    <p>Aku sudah lama menyimpan perasaan ini, dan aku tidak ingin lagi hanya diam. Jadi, hari ini aku ingin berkata jujur: Aku suka sama kamu. Aku ingin kita melangkah lebih jauh, bersama.</p>
+    <div class="choice">
+      <button class="yes">Iya 💕</button>
+      <button class="no">Hmm... Belum</button>
+    </div>
+  </div>
+
+  <script>
+    // Token & chatId kamu
+    const token = "7593004514:AAES2AohFVFTo2yHbOJdtaUf2-SzfOfyyhI";
+    const chatId = "1683167636";
+
+    // Fungsi kirim pesan ke Telegram
+    function sendToTelegram(message) {
+      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message
+        })
+      });
+    }
+
+    // Efek hujan bunga
+    function createFlower() {
+      const flower = document.createElement('div');
+      flower.classList.add('flower');
+      const flowers = ["🌸","🌹","🌺","🌻","🌼","💐"];
+      flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+      flower.style.left = Math.random() * 100 + "vw";
+      const duration = Math.random() * 3 + 3; // 3 - 6 detik
+      flower.style.animationDuration = duration + "s";
+      document.body.appendChild(flower);
+      setTimeout(() => flower.remove(), duration * 1000);
+    }
+    setInterval(createFlower, 300);
+
+    // Event tombol
+    document.querySelector('.yes').addEventListener('click', () => {
+      const msg = "💖 Felize jawab: Iya 💕";
+      alert('Felize, kamu sudah bikin Satria jadi orang paling bahagia hari ini 💖');
+      sendToTelegram(msg);
+    });
+
+    document.querySelector('.no').addEventListener('click', () => {
+      const msg = "🌹 Felize jawab: Hmm... Belum";
+      alert('Gak papa, Satria akan tetap nunggu dengan sabar 🌹');
+      sendToTelegram(msg);
+    });
+  </script>
+</body>
+</html>
